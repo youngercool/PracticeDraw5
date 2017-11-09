@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class Practice04DispatchDrawLayout extends LinearLayout {
     Pattern pattern = new Pattern();
@@ -24,7 +25,7 @@ public class Practice04DispatchDrawLayout extends LinearLayout {
     }
 
     {
-        setWillNotDraw(false);
+//        setWillNotDraw(false);
     }
 
     // 把 onDraw() 换成 dispatchDraw()，让绘制内容可以盖住子 View
@@ -33,6 +34,12 @@ public class Practice04DispatchDrawLayout extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        Toast.makeText(getContext(),"=======onDraw",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
         pattern.draw(canvas);
     }
 

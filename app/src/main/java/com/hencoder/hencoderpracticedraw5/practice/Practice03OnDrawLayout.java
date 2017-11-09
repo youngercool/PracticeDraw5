@@ -26,8 +26,23 @@ public class Practice03OnDrawLayout extends LinearLayout {
 
     {
         // 在这里插入 setWillNotDraw(false) 以启用完整的绘制流程
+        setWillNotDraw(false);
     }
+/**
+* ViewGroup默认情况下，出于性能考虑，会被设置成WILL_NOT_DROW，这样，ondraw就不会被执行了。
 
+ 如果我们想重写一个viewgroup的ondraw方法，有两种方法：
+
+ 1，构造函数中，给viewgroup设置一个颜色。
+
+ 2，构造函数中，调用setWillNotDraw（false），去掉其WILL_NOT_DRAW flag。
+
+ 在viewgroup初始化的时候，它调用了一个私有方法：initViewGroup，
+ 它里面会有一句setFlags（WILLL_NOT_DRAW,DRAW_MASK）;相当于调用了setWillNotDraw（true），
+ 所以说，对于ViewGroup，他就认为是透明的了，如果我们想要重写onDraw，就要调用setWillNotDraw（false）。
+
+*
+* */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
